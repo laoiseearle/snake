@@ -8,10 +8,15 @@ body{
     height: 100vh;
     width: 100vw;
     background-color: rgb(51, 211, 78);
+    position: fixed;
+}
+.game-container{
+    display: flex;
+    justify-content: center;
+    margin-top: 80px;
 }
 
 #game-screen{
     border: 6px solid white;
-    margin: 5%;
     box-shadow: 4px 4px 12px 3px rgb(22, 95, 34);
 }
