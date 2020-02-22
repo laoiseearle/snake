@@ -93,9 +93,21 @@ const drawFood = () => {
     ctx.strokeRect(food.x, food.y, cellSize, cellSize);
 }
 
+     
+const validFoodPos = () => {
+    for(let i = 0; i < snake.length; i++){
+        if (isEqual(snake[i], food)){
+            return false;
+        }
+    }
+    return true;
+}
+
 const eatFood = () => {
-    if(isEqual(food, snakeHead)){             
-        food = generateFood(); 
+    if(isEqual(food, snakeHead)){     
+        do{        
+            food = generateFood(); 
+        } while(!validFoodPos())
   }else{
       snake.pop();        
   }
