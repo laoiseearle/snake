@@ -10,6 +10,12 @@
 <div class="game-container">
     <canvas id="game-screen" height="400" width="400"></canvas>
 </div>
+<div class="settings">
+    <p>Speed</p>
+    <input type="radio" name="speed" value="1" onclick="changed()"> Slow
+    <input type="radio" name="speed" value="2" checked onclick="changed()"> Medium
+    <input type="radio" name="speed" value="3" onclick="changed()"> Fast
+</div>
     <script src="snake.js" type="text/javascript"></script>
 </body>
 </html>

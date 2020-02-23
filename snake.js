@@ -22,8 +22,19 @@ let snakeHead;
 let snakeDir;
 let canChangeDir = true;
 
+// Time & speed
+const timeInterval = 150;
+let speed = document.querySelector('input[name="speed"]:checked').value;
+let timer = 35 * speed;
+let prevTime = 0;
+
+let stopGame = false;
+
 // User input
 document.addEventListener("keydown", e => {
+    if(e.key === " "){
+        stopGame = false;  
+    }
     if(canChangeDir){
         if(e.key === "ArrowLeft" && snakeDir !== "right"){
             snakeDir = "left";
@@ -49,7 +60,43 @@ const isEqual = (obj1, obj2) => {
     return true;
 } 
 
-const gameSpeed = () => {
+const changed = () =>{
+    speed = document.querySelector('input[name="speed"]:checked').value;
+    resetGame();
+    update();
+} 
+const update = (time = 0) => {    
+    const timeDiff = time - prevTime;
+    prevTime = time;
+    timer += timeDiff;
+ 
+    if(timer > timeInterval){
+        timer = 30 * speed;
+
+        if(!stopGame ){
+            draw();
+        } else{
+            resetGame();
+            gameOver();
+        }
+    }
+    requestAnimationFrame(update)
+}
+
+const resetGame = () =>{
+    snakeDir = "";
+    snake = [setPosCoords((numOfCells / 2) * cellSize, (numOfCells / 2) * cellSize)];
+    food = generateFood();
+}
+
+const gameOver = () =>{
+    ctx.fillStyle = "white";
+    ctx.strokeStyle = "black";
+    ctx.font = "25px Verdana";
+    ctx.textAlign = "center";
+    ctx.strokeText("Press Space to start", width / 2, height / 2);
+    ctx.fillText("Press Space to start", width / 2, height / 2);
+
 }
 
 const draw = () => {
@@ -65,8 +112,7 @@ const draw = () => {
 const tailHit = (head, snakeArray) => {
      for(let i = 0; i < snakeArray.length; i++){
          if(isEqual(head, snakeArray[i])){
-                // TODO: Add game over function
-                console.log("tail hit");
+                stopGame = true;
             }
      }
 }
@@ -92,8 +138,6 @@ const drawFood = () => {
     ctx.fillRect(food.x, food.y, cellSize, cellSize);
     ctx.strokeRect(food.x, food.y, cellSize, cellSize);
 }
-
-     
 const validFoodPos = () => {
     for(let i = 0; i < snake.length; i++){
         if (isEqual(snake[i], food)){
@@ -136,5 +180,4 @@ const eatFood = () => {
     canChangeDir = true;
     }
 
-// TODO: change to requestAnimationFrame
-setInterval(draw, 70); 
+update();
