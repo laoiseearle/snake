@@ -2,21 +2,54 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-
 body{
     height: 100vh;
     width: 100vw;
-    background-color: rgb(51, 211, 78);
+    background-color: rgb(215, 248, 209);
     position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .game-container{
     display: flex;
-    justify-content: center;
-    margin-top: 80px;
+    margin-top: 20px;
 }
-
 #game-screen{
     border: 6px solid white;
-    box-shadow: 4px 4px 12px 3px rgb(22, 95, 34);
+    box-shadow: 4px 4px 12px 3px rgb(123, 168, 131);
+}
+.settings{
+    margin-top: 20px;
+    color: white;
+}
+.settings input[type="radio"]{
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.settings input[type="radio"]:checked + label{
+    background-color: rgb(192, 192, 192);
+    color: black;
+}
+.settings label{
+    background-color: rgb(70, 66, 66);
+    border: 1px solid rgb(2, 2, 2);
+    padding: 5px;
+    width: 100px;
+    text-align: center;
+    cursor: pointer;
+}
+.settings h2{
+    color: black;
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+.speed-radio{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
 }
