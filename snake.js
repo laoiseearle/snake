@@ -62,7 +62,6 @@ const isEqual = (obj1, obj2) => {
 
 const changed = () =>{
     speed = document.querySelector('input[name="speed"]:checked').value;
-    resetGame();
     update();
 } 
 const update = (time = 0) => {    
